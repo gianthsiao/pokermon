@@ -28,10 +28,7 @@ def iv_calculation_2(win_rate, bet, total_pot, my_all_bet):
                 return (True, bet, None)
             elif win_rate > combat_threshold:
                 expect_ratio = bet / my_all_bet
-                if expect_ratio > cofidience_ratio:
-                return (True, bet, None)
-            else:
-                return (False, 0, None)
+                return  (True, bet, None)if expect_ratio > cofidience_ratio else (False, 0, None)
         else:
             return (False,0,None)
     elif total_pot > players * 20 and my_all_bet < init_bet / 6:
@@ -50,8 +47,8 @@ if __name__ == '__main__':
     bets_list = [x * 10 for x in xrange(0, (my_all_bet+10)/10)]
     win_rate = win_rate_list[3]
     for bet in bets_list:
-        (result, bet, value) = iv_calculation_1(win_rate, float(bet), float(total_pot), my_all_bet)
-#        (result, bet, value) = iv_calculation_2(win_rate, float(bet), float(total_pot), my_all_bet)
+#        (result, bet, value) = iv_calculation_1(win_rate, float(bet), float(total_pot), my_all_bet)
+        (result, bet, value) = iv_calculation_2(win_rate, float(bet), float(total_pot), my_all_bet)
         if result:
             print "total_pot %d " % total_pot
             print "should raise bet to %d" % bet
